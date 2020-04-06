@@ -89,11 +89,11 @@ export default {
         type: 'FeatureCollection',
         name: undefined,
         layerType: undefined,
-        features: json.features.filter((feature) => {
+        features: data.features.filter((feature) => {
             return feature.properties.KABUPATEN == "TULUNGAGUNG"
         })
     }
-    console.log(geo.features)
+    // console.log(geo.features)
     this.geojson = geo
     this.loading = false
   }
