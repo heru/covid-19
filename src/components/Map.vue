@@ -10,22 +10,24 @@
                   :geojson="geojson"
                   :options="options"
                   :options-style="styleFunction"
-                />
-                 <l-marker :lat-lng="marker" />
+                >
+                </l-geo-json>
+                 <!-- <l-marker :lat-lng="marker" /> -->
             </l-map>
         </div>
     </div>
 </template>
 <script>
-import { latLng } from "leaflet"
-import { LMap, LTileLayer, LMarker, LGeoJson } from "vue2-leaflet"
+// import { latLng } from "leaflet"
+// import { LMap, LTileLayer, LMarker, LGeoJson } from "vue2-leaflet"
+import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet"
 
 export default {
   components: {
     LMap,
     LTileLayer,
     LGeoJson,
-    LMarker
+    // LMarker
   },
   data () {
     return {
@@ -39,7 +41,7 @@ export default {
         enableTooltip: true,
         fillColor: '#e4ce7f',
         show: true,
-        marker: latLng(-8.196913, 111.824103),
+        // marker: latLng(-8.196913, 111.824103),
         data: null
     }
   },
