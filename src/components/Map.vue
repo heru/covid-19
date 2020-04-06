@@ -53,7 +53,7 @@ export default {
     download() {
       var a = document.createElement("a");
       const geo = this.geojson
-      var file = new Blob(geo, {type: 'text/plain'});
+      var file = new Blob([geo], {type: 'text/plain'});
       a.href = URL.createObjectURL(file);
       a.download = "tulungagung.geojson";
       a.click();
