@@ -1,10 +1,7 @@
 <template>
     <div class="map">
-        <!-- <button class="btn" @click="download" v-if="!loading">download</button> -->
+        <h5 v-if="!loading">Update tanggal {{ data.tanggal }}</h5>
         <div v-if="loading">Loading map, please wait ...</div>
-        <!-- <div v-if="!loading">
-          {{ geojson }}
-        </div> -->
         <div style="width: 100%; height: 900px;" v-if="!loading">
             <l-map :zoom="zoom" :center="center">
                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -22,13 +19,6 @@
 <script>
 import { latLng } from "leaflet"
 import { LMap, LTileLayer, LMarker, LGeoJson } from "vue2-leaflet"
-// import fs from "fs";
-
-// fs.readFile("../assets/batas_kecamatan.geojson", "utf8",  (err, data)  => {
-//     if (err) throw err;
-//     const json = JSON.parse(data);
-// });
-// const json = require('../assets/batas_kecamatan.geojson')
 
 export default {
   components: {
@@ -49,7 +39,8 @@ export default {
         enableTooltip: true,
         fillColor: '#e4ce7f',
         show: true,
-        marker: latLng(-8.196913, 111.824103)
+        marker: latLng(-8.196913, 111.824103),
+        data: null
     }
   },
   methods: {
@@ -86,30 +77,63 @@ export default {
           return () => {}
        }
        return (feature, layer) => {
-         if(feature.properties.KECAMATAN == "CAMPUR DARAT") {
-            layer.setStyle({
-              color: '#FF0000',
-              fillColor: '#FF0000',
-              // fillOpacity: 0.09,
-            })
-         }
-         layer.bindTooltip(
-            "<div>Kecamatan :" +
-            feature.properties.KECAMATAN +
-            "</div><div>PDP :" +
-            feature.properties.LUAS_KM2 + 
-            "</div>",
-            { permanent: false, sticky: true }
-         )
+         const keyword = feature.properties.KECAMATAN
+         const data = this.data.data
+         
+         data.find((el) => {     
+          
+           if(el.kecamatan == keyword) {
+             console.dir(el)
+             console.log(keyword)
+             const pdp = el.pdp
+             const odp = el.odp
+             const positif = el.positif
+             const otg = el.otg
+             if(positif > 0) {
+                layer.setStyle({
+                  color: '#000000',
+                  fillColor: '#FF0000',
+                  // fillOpacity: 0.09,
+                })
+             }
+              layer.bindTooltip(
+                  `<div>Kecamatan : ${feature.properties.KECAMATAN} </div>
+                  <div>PDP : ${pdp}</div>
+                  <div>ODP : ${odp}</div>
+                  <div>Positif: ${positif}</div>
+                  <div>OTG : ${otg}`,
+                  { permanent: false, sticky: true }
+              )
+           }
+         })
+        
+        //  if(feature.properties.KECAMATAN == "CAMPUR DARAT") {
+        //     layer.setStyle({
+        //       color: '#FF0000',
+        //       fillColor: '#FF0000',
+        //       // fillOpacity: 0.09,
+        //     })
+        //  }
+        //  layer.bindTooltip(
+        //     "<div>Kecamatan :" +
+        //     feature.properties.KECAMATAN +
+        //     "</div><div>PDP :" +
+        //     feature.properties.LUAS_KM2 + 
+        //     "</div>",
+        //     { permanent: false, sticky: true }
+        //  )
        }
     }
   },
   async created() {
     this.loading = true
+    const data_resp = await fetch('https://raw.githubusercontent.com/heru/geodata/master/data.json')
+    this.data = await data_resp.json()
     const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson')
     const data = await response.json()
     this.geojson = data
     this.loading = false
+    
   }
 }
 </script>
