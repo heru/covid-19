@@ -80,11 +80,8 @@ export default {
          const keyword = feature.properties.KECAMATAN
          const data = this.data.data
          
-         data.find((el) => {     
-          
+         data.find((el) => {  
            if(el.kecamatan == keyword) {
-             console.dir(el)
-             console.log(keyword)
              const pdp = el.pdp
              const odp = el.odp
              const positif = el.positif
