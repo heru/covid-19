@@ -1,7 +1,10 @@
 <template>
     <div class="map">
-        <button class="btn" @click="download" v-if="!loading">download</button>
+        <!-- <button class="btn" @click="download" v-if="!loading">download</button> -->
         <div v-if="loading">Loading map, please wait ...</div>
+        <!-- <div v-if="!loading">
+          {{ geojson }}
+        </div> -->
         <div style="width: 100%; height: 900px;" v-if="!loading">
             <l-map :zoom="zoom" :center="center">
                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -38,8 +41,8 @@ export default {
     return {
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        zoom: 10,
-        center: [-8.196913,111.824103],
+        zoom: 11,
+        center: [-8.297913,111.824103],
         bounds: null,
         loading: false,
         geojson: null,
@@ -51,6 +54,7 @@ export default {
   },
   methods: {
     download() {
+      
       var a = document.createElement("a");
       const geo = this.geojson
       var file = new Blob([geo], {type: 'text/plain'});
@@ -82,10 +86,17 @@ export default {
           return () => {}
        }
        return (feature, layer) => {
+         if(feature.properties.KECAMATAN == "CAMPUR DARAT") {
+            layer.setStyle({
+              color: '#FF0000',
+              fillColor: '#FF0000',
+              // fillOpacity: 0.09,
+            })
+         }
          layer.bindTooltip(
             "<div>Kecamatan :" +
             feature.properties.KECAMATAN +
-            "</div><div>Luas :" +
+            "</div><div>PDP :" +
             feature.properties.LUAS_KM2 + 
             "</div>",
             { permanent: false, sticky: true }
@@ -95,18 +106,9 @@ export default {
   },
   async created() {
     this.loading = true
-    const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/batas_kecamatan.geojson')
+    const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson')
     const data = await response.json()
-    const geo = {
-        type: 'FeatureCollection',
-        name: undefined,
-        layerType: undefined,
-        features: data.features.filter((feature) => {
-            return feature.properties.KABUPATEN == "TULUNGAGUNG"
-        })
-    }
-    // console.log(geo.features)
-    this.geojson = geo
+    this.geojson = data
     this.loading = false
   }
 }
