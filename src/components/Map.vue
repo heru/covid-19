@@ -1,6 +1,8 @@
 <template>
     <div class="map">
-        <div style="width: 100%; height: 900px;">
+        <button class="btn" @click="download" v-if="!loading">download</button>
+        <div v-if="loading">Loading map, please wait ...</div>
+        <div style="width: 100%; height: 900px;" v-if="!loading">
             <l-map :zoom="zoom" :center="center">
                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                 <l-geo-json
@@ -45,6 +47,16 @@ export default {
         fillColor: '#e4ce7f',
         show: true,
         marker: latLng(-8.196913, 111.824103)
+    }
+  },
+  methods: {
+    download() {
+      var a = document.createElement("a");
+      const geo = this.geojson
+      var file = new Blob(geo, {type: 'text/plain'});
+      a.href = URL.createObjectURL(file);
+      a.download = "tulungagung.geojson";
+      a.click();
     }
   },
   computed: {
