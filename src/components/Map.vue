@@ -103,28 +103,16 @@ export default {
               )
            }
          })
-        
-        //  if(feature.properties.KECAMATAN == "CAMPUR DARAT") {
-        //     layer.setStyle({
-        //       color: '#FF0000',
-        //       fillColor: '#FF0000',
-        //       // fillOpacity: 0.09,
-        //     })
-        //  }
-        //  layer.bindTooltip(
-        //     "<div>Kecamatan :" +
-        //     feature.properties.KECAMATAN +
-        //     "</div><div>PDP :" +
-        //     feature.properties.LUAS_KM2 + 
-        //     "</div>",
-        //     { permanent: false, sticky: true }
-        //  )
        }
     }
   },
   async created() {
     this.loading = true
-    const data_resp = await fetch('https://raw.githubusercontent.com/heru/geodata/master/data.json')
+    const data_resp = await fetch(
+      'https://raw.githubusercontent.com/heru/geodata/master/data.json',
+      {
+        cache: 'no-store'
+      })
     this.data = await data_resp.json()
     const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson')
     const data = await response.json()
