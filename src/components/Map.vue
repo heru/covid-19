@@ -36,7 +36,7 @@ export default {
     return {
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        zoom: 8,
+        zoom: 10,
         center: [-8.196913,111.824103],
         bounds: null,
         loading: false,
