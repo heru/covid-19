@@ -1,5 +1,7 @@
-# covid-19
-feel free to contact me at heru[at]gmail[dot]com
+# Covid-19
+Covid-19 visualization data, for demo version please check out https://tulungagung.now.sh or https://tulungagung.netlify.com
+
+You could fork, clone, try and modify the source code. it's free. If you have an issue, please contact me at heru[at]gmail[dot]com
 
 ## Data & BaseMap
 Data available on : https://github.com/heru/geodata, look at tulungagung.geojson for map
