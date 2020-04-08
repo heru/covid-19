@@ -1,21 +1,31 @@
 <template>
   <v-app>
-    <v-navigation-drawer app>
+    <v-navigation-drawer
+      class="deep-purple accent-4"
+      dark
+      permanent
+    >
       <v-list>
         <v-list-item
-          v-for="menu in menus"
-          :key="menu.title"
+          v-for="item in items"
+          :key="item.title"
           link
         >
           <v-list-item-icon>
-            <v-icon>{{ menu.icon }}</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ menu.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block>Logout</v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-app-bar
       app
@@ -45,7 +55,8 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        @click="gotoAbout"
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
         text
       >
         <span class="mr-2">Latest Release</span>
@@ -55,21 +66,9 @@
 
     <v-content>
       <v-container fluid>
-        <Map/>
-      </v-container>      
+        <Map></Map>
+      </v-container>
     </v-content>
-    <v-footer class="secondary" app dark>
-      <v-layout row wrap align-center>
-        <v-flex xs12>
-          <div class="white--text ml-3">
-            Made with
-            <v-icon>mdi-favorite</v-icon>
-            by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
-            and <a class="white--text" href="https://github.com/heru" target="_blank">Heru Eko Susanto</a>
-          </div>
-        </v-flex>
-      </v-layout>
-    </v-footer>
   </v-app>
 </template>
 
@@ -84,16 +83,11 @@ export default {
   },
 
   data: () => ({
-    menus: [
+    items: [
       { title: 'Dashboard', icon: 'dashboard' },
       { title: 'Account', icon: 'account_box' },
       { title: 'Admin', icon: 'gavel' },
-    ],
+    ]
   }),
-  methods: {
-    gotoAbout: () => {
-      this.$router.push({name: 'About'})
-    }
-  }
 };
 </script>
