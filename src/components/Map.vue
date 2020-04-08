@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ma-5">
         <h5 v-if="!loading">Update tanggal {{ data.tanggal }}, klik masing-masing wilayah untuk melihat detail</h5>
         <div v-if="loading">Loading map, please wait ...</div>
         <div class="map">
