@@ -1,5 +1,22 @@
 <template>
   <v-app>
+    <v-navigation-drawer app>
+      <v-list>
+        <v-list-item
+          v-for="menu in menus"
+          :key="menu.title"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ menu.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ menu.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-app-bar
       app
       color="primary"
@@ -37,8 +54,22 @@
     </v-app-bar>
 
     <v-content>
-      <Map/>
+      <v-container fluid>
+        <Map/>
+      </v-container>      
     </v-content>
+    <v-footer class="secondary" app dark>
+      <v-layout row wrap align-center>
+        <v-flex xs12>
+          <div class="white--text ml-3">
+            Made with
+            <v-icon>mdi-favorite</v-icon>
+            by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
+            and <a class="white--text" href="https://github.com/heru" target="_blank">Heru Eko Susanto</a>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-footer>
   </v-app>
 </template>
 
@@ -53,7 +84,11 @@ export default {
   },
 
   data: () => ({
-    //
+    menus: [
+      { title: 'Dashboard', icon: 'dashboard' },
+      { title: 'Account', icon: 'account_box' },
+      { title: 'Admin', icon: 'gavel' },
+    ],
   }),
   methods: {
     gotoAbout: () => {
