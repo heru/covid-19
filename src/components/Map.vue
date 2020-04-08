@@ -2,21 +2,22 @@
     <div>
         <h5 v-if="!loading">Update tanggal {{ data.tanggal }}, klik masing-masing wilayah untuk melihat detail</h5>
         <div v-if="loading">Loading map, please wait ...</div>
-        <div class="map">
-          <div style="width: 100%; height: 900px;" v-if="!loading">
-              <l-map :zoom="zoom" :center="center">
-                  <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                  <l-geo-json
-                    v-if="show"
-                    :geojson="geojson"
-                    :options="options"
-                    :options-style="styleFunction"
-                  >
-                  </l-geo-json>
-                  <!-- <l-marker :lat-lng="marker" /> -->
-              </l-map>
-          </div>
-        </div>
+        <l-map 
+          :zoom="zoom" 
+          :center="center"
+          style="width: 100%; height: 900px;" 
+          v-if="!loading"
+        >
+            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+            <l-geo-json
+              v-if="show"
+              :geojson="geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <!-- <l-marker :lat-lng="marker" /> -->
+        </l-map> 
     </div>
 </template>
 <script>
@@ -36,7 +37,7 @@ export default {
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         zoom: 11,
-        center: [-8.297913,111.824103],
+        center: [-8.197913,111.824103],
         bounds: null,
         loading: false,
         geojson: null,
