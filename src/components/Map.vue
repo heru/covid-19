@@ -1,19 +1,21 @@
 <template>
-    <div class="map">
-        <h5 v-if="!loading">Update tanggal {{ data.tanggal }}</h5>
+    <div>
+        <h5 v-if="!loading">Update tanggal {{ data.tanggal }}, klik masing-masing wilayah untuk melihat detail</h5>
         <div v-if="loading">Loading map, please wait ...</div>
-        <div style="width: 100%; height: 900px;" v-if="!loading">
-            <l-map :zoom="zoom" :center="center">
-                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                <l-geo-json
-                  v-if="show"
-                  :geojson="geojson"
-                  :options="options"
-                  :options-style="styleFunction"
-                >
-                </l-geo-json>
-                 <!-- <l-marker :lat-lng="marker" /> -->
-            </l-map>
+        <div class="map">
+          <div style="width: 100%; height: 900px;" v-if="!loading">
+              <l-map :zoom="zoom" :center="center">
+                  <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                  <l-geo-json
+                    v-if="show"
+                    :geojson="geojson"
+                    :options="options"
+                    :options-style="styleFunction"
+                  >
+                  </l-geo-json>
+                  <!-- <l-marker :lat-lng="marker" /> -->
+              </l-map>
+          </div>
         </div>
     </div>
 </template>
