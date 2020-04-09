@@ -44,11 +44,11 @@ const store = new Vuex.Store({
     },
     loadMap({commit}){
       commit('setLoading')
-      fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson').then(response => {
+      fetch('https://raw.githubusercontent.com/heru/geodata/master/trenggalek.geojson').then(response => {
         if(response.status != 200) {
           return;
         }
-        response.json().then(data => {
+        response.json().then(data => {          
           commit('setGeojson', data)
           commit('setLoading')
         })        

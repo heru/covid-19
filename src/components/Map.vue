@@ -54,11 +54,12 @@ export default {
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         zoom: 10,
-        center: [-8.107913,111.904103],
+        center: [-8.17913,111.709103],
         bounds: null,
         enableTooltip: true,
         fillColor: '#e4ce7f',
-        show: true
+        show: true,
+        trengalek: []
     }
   },
   computed: {
@@ -117,6 +118,6 @@ export default {
          })
        }
     }
-  }
+  },
 }
 </script>
