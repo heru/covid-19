@@ -15,14 +15,14 @@
             Data diperoleh dari informasi covid-19 yang disediakan oleh masing-masing pemerintah daerah.
             Kabupaten Tulungagung diperoleh dari website 
             <a href="http://dinkestulungagung.net">Dinas Kesehatan Kabupaten Tulungagung</a>. 
-            Kabupaten Trenggalek diperoleh dari websiet <a href="http://corona.trenggalekkab.go.id">Info Corona Kab. Trenggalek</a>
+            Kabupaten Trenggalek diperoleh dari website <a href="http://corona.trenggalekkab.go.id">Info Corona Kab. Trenggalek</a>
             Data yang ditampilkan disini akan diupdate sewaktu-waktu jika ada perubahan data dari kedua website tersebut.
         </v-card-text>
         <v-card-subtitle>Source Code</v-card-subtitle>
         <v-card-text>
           Source code aplikasi ini bisa diakses di <a href="https://github.com/heru/covid-19">github.com/heru/covid-19</a>. 
-          sedangkan data peta dan covid-19 bisa diakses di <a href="https://github.com/heru/geodata">github.com/heru/geodata</a>
-          dan dihosting di <a href="https://zeit.co">zeit.co</a> dan <a href="https://netlify.com">netlify</a>.
+          sedangkan data peta dan covid-19 bisa diakses di <a href="https://github.com/heru/geodata">github.com/heru/geodata</a>.
+          Hosting Website di <a href="https://zeit.co">zeit.co</a> dan <a href="https://netlify.com">netlify</a>.
         </v-card-text>
         <v-card-text>
           Source code aplikasi ini tersedia bebas untuk di copy, modifikasi dan digunakan asalkan dicantumkan sumber aplikasinya.

@@ -39,12 +39,14 @@ export default {
     this.loading = true
     const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/batas_kecamatan.geojson')
     const data = await response.json()
+    const kabupaten_list = ['TULUNGAGUNG', 'TRENGGALEK', 'KEDIRI']
     const geo = {
       type: 'FeatureCollection',
       name: undefined,
       layerType: undefined,
       features: data.features.filter((feature) => {
-        return feature.properties.KABUPATEN == "TULUNGAGUNG" || feature.properties.KABUPATEN == "TRENGGALEK"
+        const kabupaten = feature.properties.KABUPATEN
+        return kabupaten_list.includes(kabupaten)
       })
     }
     this.geojson = geo
