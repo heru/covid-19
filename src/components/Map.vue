@@ -56,13 +56,9 @@ export default {
         zoom: 10,
         center: [-8.107913,111.904103],
         bounds: null,
-        // loading: false,
-        // geojson: null,
         enableTooltip: true,
         fillColor: '#e4ce7f',
-        show: true,
-        // marker: latLng(-8.196913, 111.824103),
-        // data: null
+        show: true
     }
   },
   computed: {
@@ -121,19 +117,6 @@ export default {
          })
        }
     }
-  },
-  // async created() {
-  //   this.loading = true
-  //   const data_resp = await fetch(
-  //     'https://raw.githubusercontent.com/heru/geodata/master/data.json',
-  //     {
-  //       cache: 'no-store'
-  //     })
-  //   this.data = await data_resp.json()
-  //   const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson')
-  //   const data = await response.json()
-  //   this.geojson = data
-  //   this.loading = false
-  // }
+  }
 }
 </script>

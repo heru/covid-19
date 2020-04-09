@@ -4,8 +4,9 @@
             <v-col cols="12">
                 <v-card>
                     <v-card-title>
-                        Informasi Tiap Kecamatan {{ data.tanggal }}
+                        Informasi Tiap Kecamatan 
                     </v-card-title>
+                    <v-card-subtitle>Update data {{ data.tanggal }}</v-card-subtitle>
                     <v-card-text>
                         <v-simple-table>
                             <template v-slot:default>
