@@ -29,7 +29,7 @@
       dark
     >
       <v-app-bar-nav-icon @click="show"></v-app-bar-nav-icon>
-      <v-toolbar-title>COVID-19 Tulungagung</v-toolbar-title>
+      <v-toolbar-title>COVID-19 Tulungagung (un official)</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
 
