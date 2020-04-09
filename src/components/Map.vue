@@ -56,16 +56,6 @@ export default {
   },
   data () {
     return {
-<<<<<<< HEAD
-      url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      zoom: 10,
-      center: [-8.107913,111.904103],
-      bounds: null,
-      enableTooltip: true,
-      fillColor: '#e4ce7f',
-      show: true
-=======
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         zoom: 10,
@@ -75,7 +65,6 @@ export default {
         fillColor: '#e4ce7f',
         show: true,
         trengalek: []
->>>>>>> trenggalek
     }
   },
   computed: {
@@ -108,32 +97,6 @@ export default {
       }
       return (feature, layer) => {
         const keyword = feature.properties.KECAMATAN
-<<<<<<< HEAD
-        const data = this.data.data
-        
-        data.find((el) => {  
-          if(el.kecamatan == keyword) {
-            const pdp = el.pdp
-            const odp = el.odp
-            const positif = el.positif
-            const otg = el.otg
-            if(positif > 0) {
-              layer.setStyle({
-                color: '#FFFFFF',
-                fillColor: '#FF0000'
-              })
-            }
-            layer.bindTooltip(
-                `<div>Kecamatan : ${feature.properties.KECAMATAN} </div>
-                <div>PDP : ${pdp}</div>
-                <div>ODP : ${odp}</div>
-                <div>Positif: ${positif}</div>
-                <div>OTG : ${otg}`,
-                { permanent: false, sticky: true }
-            )
-          }
-        })
-=======
         let data = []
         let color = '#FFFFFF'
         switch(feature.properties.KABUPATEN) {          
@@ -189,7 +152,6 @@ export default {
             { permanent: false, sticky: true }
           )
         }         
->>>>>>> trenggalek
       }
     }
   }
