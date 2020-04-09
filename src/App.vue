@@ -11,6 +11,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
+          :to="item.path"
           link
         >
           <v-list-item-icon>
@@ -34,46 +35,35 @@
     </v-app-bar>
 
     <v-content>
-      <v-container
-        class="fill-height"
-        fluid>
-        <v-row dense>
-          <v-col cols="12" xl="6" md="12" sm="12" xs="12">
-            <Map></Map>
-          </v-col>
-          <v-col cols="12">
-            <Info></Info>
-          </v-col>
-        </v-row>        
-      </v-container>
+      <router-view></router-view>      
     </v-content>
     <v-footer
       color="cyan"
       app
     >
       <v-spacer />
-      <a href="https://github.com/heru/covid-19">
-        <span class="white--text">&copy; 2019 </span> Heru Eko Susanto
+      <a href="https://github.com/heru/covid-19" style="text-decoration: none">
+        <span class="white--text">&copy; 2020 </span> github.com/heru/covid-19
       </a>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import Map from './components/Map';
-import Info from '@/components/Info'
+// import Map from './components/Map';
+// import Info from '@/components/Info'
 
 export default {
   name: 'App',
-  components: {
-    Map,
-    Info
-  },
+  // components: {
+  //   Map,
+  //   Info
+  // },
   data () {
     return {
       items: [
-        { title: 'Dashboard', icon: 'mdi-home' },
-        // { title: 'About', icon: 'mdi-about' }
+        { title: 'Dashboard', icon: 'mdi-home', path: { name: 'Home'} },
+        { title: 'About', icon: 'mdi-account', path: { name: 'About'} }
       ],
       drawer: null
     }
