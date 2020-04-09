@@ -1,13 +1,20 @@
 <template>
-    <div>
-        <h5 v-if="!loading">Update tanggal {{ data.tanggal }}, klik masing-masing wilayah untuk melihat detail</h5>
-        <div v-if="loading">Loading map, please wait ...</div>
-        <l-map 
-          :zoom="zoom" 
-          :center="center"
-          style="width: 100%; height: 900px;" 
-          v-if="!loading"
-        >
+    <v-card class="ma-5">
+      <v-card-title>
+        <h5 v-if="!loading">Update tanggal {{ data.tanggal }}</h5>
+        <h5 v-if="loading">Loading map</h5>
+      </v-card-title>
+      <v-card-subtitle v-if="!loading">
+        Klik masing-masing wilayah untuk melihat detail
+      </v-card-subtitle>
+      <v-card-text>
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          v-if="loading"
+          center
+        ></v-progress-circular>     
+        <l-map :zoom="zoom" :center="center" id="map" v-if="!loading" style="z-index: 0;">
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
             <l-geo-json
               v-if="show"
@@ -16,14 +23,24 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
-            <!-- <l-marker :lat-lng="marker" /> -->
-        </l-map> 
-    </div>
+        </l-map>
+      </v-card-text>
+    </v-card>
 </template>
+<style>
+#map{
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+}
+.map {
+  width: 100%;
+  height: 100%;
+}
+</style>
 <script>
-// import { latLng } from "leaflet"
-// import { LMap, LTileLayer, LMarker, LGeoJson } from "vue2-leaflet"
 import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet"
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -36,30 +53,24 @@ export default {
     return {
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        zoom: 11,
-        center: [-8.197913,111.824103],
+        zoom: 10,
+        center: [-8.107913,111.904103],
         bounds: null,
-        loading: false,
-        geojson: null,
+        // loading: false,
+        // geojson: null,
         enableTooltip: true,
         fillColor: '#e4ce7f',
         show: true,
         // marker: latLng(-8.196913, 111.824103),
-        data: null
-    }
-  },
-  methods: {
-    download() {
-      
-      var a = document.createElement("a");
-      const geo = this.geojson
-      var file = new Blob([geo], {type: 'text/plain'});
-      a.href = URL.createObjectURL(file);
-      a.download = "tulungagung.geojson";
-      a.click();
+        // data: null
     }
   },
   computed: {
+    ...mapGetters([
+      'geojson',
+      'data',
+      'loading'
+    ]),
     options() {
         return {
             onEachFeature: this.onEachFeatureFunction
@@ -93,7 +104,7 @@ export default {
              const otg = el.otg
              if(positif > 0) {
                 layer.setStyle({
-                  color: '#000000',
+                  color: '#FFFFFF',
                   fillColor: '#FF0000',
                   // fillOpacity: 0.09,
                 })
@@ -111,19 +122,18 @@ export default {
        }
     }
   },
-  async created() {
-    this.loading = true
-    const data_resp = await fetch(
-      'https://raw.githubusercontent.com/heru/geodata/master/data.json',
-      {
-        cache: 'no-store'
-      })
-    this.data = await data_resp.json()
-    const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson')
-    const data = await response.json()
-    this.geojson = data
-    this.loading = false
-    
-  }
+  // async created() {
+  //   this.loading = true
+  //   const data_resp = await fetch(
+  //     'https://raw.githubusercontent.com/heru/geodata/master/data.json',
+  //     {
+  //       cache: 'no-store'
+  //     })
+  //   this.data = await data_resp.json()
+  //   const response = await fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson')
+  //   const data = await response.json()
+  //   this.geojson = data
+  //   this.loading = false
+  // }
 }
 </script>
