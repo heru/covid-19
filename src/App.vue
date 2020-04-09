@@ -1,11 +1,13 @@
 <template>
-  <v-app>
+  <v-app style="z-index: 9998">
     <v-navigation-drawer
-      class="deep-purple accent-4"
-      dark
-      permanent
+      v-model="drawer"
+      app
+      dark      
+      color="secondary"
+      style="z-index: 9999"  
     >
-      <v-list>
+      <v-list dense>
         <v-list-item
           v-for="item in items"
           :key="item.title"
@@ -20,74 +22,66 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-
-      <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block>Logout</v-btn>
-        </div>
-      </template>
     </v-navigation-drawer>
     <v-app-bar
       app
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
+      <v-app-bar-nav-icon @click="show"></v-app-bar-nav-icon>
+      <v-toolbar-title>COVID-19 Tulungagung</v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-content>
-      <v-container fluid>
-        <Map></Map>
+      <v-container
+        class="fill-height"
+        fluid>
+        <v-row dense>
+          <v-col cols="12" xl="6" md="12" sm="12" xs="12">
+            <Map></Map>
+          </v-col>
+          <v-col cols="12">
+            <Info></Info>
+          </v-col>
+        </v-row>        
       </v-container>
     </v-content>
+    <v-footer
+      color="cyan"
+      app
+    >
+      <v-spacer />
+      <a href="https://github.com/heru/covid-19">
+        <span class="white--text">&copy; 2019 </span> Heru Eko Susanto
+      </a>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
 import Map from './components/Map';
+import Info from '@/components/Info'
 
 export default {
   name: 'App',
-
   components: {
     Map,
+    Info
   },
-
-  data: () => ({
-    items: [
-      { title: 'Dashboard', icon: 'dashboard' },
-      { title: 'Account', icon: 'account_box' },
-      { title: 'Admin', icon: 'gavel' },
-    ]
-  }),
+  data () {
+    return {
+      items: [
+        { title: 'Dashboard', icon: 'mdi-home' },
+        // { title: 'About', icon: 'mdi-about' }
+      ],
+      drawer: null
+    }
+  },
+  methods: {
+    show(){
+      this.drawer = !this.drawer
+    }
+  }
 };
 </script>
