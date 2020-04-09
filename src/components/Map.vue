@@ -1,8 +1,8 @@
 <template>
     <v-card class="ma-5">
       <v-card-title>
-        <h5 v-if="!loading">Update tanggal {{ data.tanggal }}</h5>
-        <h5 v-if="loading">Loading map</h5>
+        <span v-if="loading">Loading data ...</span>
+        <span v-if="!loading">Sebaran COVID-19</span>
       </v-card-title>
       <v-card-subtitle v-if="!loading">
         Klik masing-masing wilayah untuk melihat detail
@@ -24,6 +24,11 @@
             >
             </l-geo-json>
         </l-map>
+      </v-card-text>
+      <v-card-text>
+        <p>Sumber data :<br/>
+        DINAS Kesehatan Kab. Tulungagung tanggal {{ tulungagung.tanggal }} <br/>
+        DINAS Kesehatan Kab. Trenggalek {{ trenggalek.tanggal }}</p>
       </v-card-text>
     </v-card>
 </template>
@@ -51,6 +56,7 @@ export default {
   },
   data () {
     return {
+<<<<<<< HEAD
       url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 10,
@@ -59,12 +65,24 @@ export default {
       enableTooltip: true,
       fillColor: '#e4ce7f',
       show: true
+=======
+        url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        zoom: 10,
+        center: [-8.09913,111.700103],
+        bounds: null,
+        enableTooltip: true,
+        fillColor: '#e4ce7f',
+        show: true,
+        trengalek: []
+>>>>>>> trenggalek
     }
   },
   computed: {
     ...mapGetters([
       'geojson',
-      'data',
+      'tulungagung',
+      'trenggalek',
       'loading'
     ]),
     options() {
@@ -90,6 +108,7 @@ export default {
       }
       return (feature, layer) => {
         const keyword = feature.properties.KECAMATAN
+<<<<<<< HEAD
         const data = this.data.data
         
         data.find((el) => {  
@@ -114,6 +133,63 @@ export default {
             )
           }
         })
+=======
+        let data = []
+        let color = '#FFFFFF'
+        switch(feature.properties.KABUPATEN) {          
+          case 'TULUNGAGUNG':
+            data = this.tulungagung.data
+            break
+          case 'TRENGGALEK':
+            data = this.trenggalek.data
+            color = '#000000'
+            break
+          default:
+            break
+        }
+        if(null != data) {
+          data.find((el) => {  
+            if(el.kecamatan == keyword) {
+              const pdp = el.pdp
+              const odp = el.odp
+              const positif = el.positif
+              const otg = el.otg
+              let fillColor = '#e4ce7f'
+              if(positif > 0) {
+                fillColor = '#FF0000'
+              } 
+
+              layer.setStyle({
+                color: color,
+                fillColor: fillColor
+                // fillOpacity: 0.09,
+              })
+              layer.bindTooltip(
+                  `
+                  <div>Kabupaten : ${feature.properties.KABUPATEN} </div>
+                  <div>Kecamatan : ${feature.properties.KECAMATAN} </div>
+                  <div>PDP : ${pdp}</div>
+                  <div>ODP : ${odp}</div>
+                  <div>Positif: ${positif}</div>
+                  <div>OTG : ${otg}`,
+                  { permanent: false, sticky: true }
+              )
+            }
+          })
+        } else {
+          layer.setStyle({
+            color: '#000000',
+            fillColor: '#ECEFF1',
+            // fillOpacity: 0.09,
+          })
+          layer.bindTooltip(
+            `<div>Kecamatan : ${feature.properties.KECAMATAN} </div>
+            <div>LUAS : ${feature.properties.LUAS_KM2}</div>
+            `,
+            { permanent: false, sticky: true }
+          )
+        }         
+>>>>>>> trenggalek
       }
     }
   }

@@ -5,10 +5,12 @@ const store = new Vuex.Store({
   state: {
     loading: false,
     geojson: [],
-    data: []
+    tulungagung: [],
+    trenggalek: []
   },
   getters: {
-    data: state => state.data,
+    tulungagung: state => state.tulungagung,
+    trenggalek: state => state.trenggalek,
     geojson: state => state.geojson,
     loading: state => state.loading
   },
@@ -16,18 +18,21 @@ const store = new Vuex.Store({
     setLoading(state) {
       state.loading = !state.loading
     },
-    setData(state, data){
-      state.data = data
+    setDataTulungagung(state, data){
+      state.tulungagung = data
+    },
+    setDataTrenggalek(state, data) {
+      state.trenggalek = data
     },
     setGeojson(state, data) {
       state.geojson = data
     }
   },
   actions: {
-    loadData({commit}){
+    loadDataTulungagung({commit}){
       commit('setLoading')
       fetch(
-        'https://raw.githubusercontent.com/heru/geodata/master/data.json',
+        'https://raw.githubusercontent.com/heru/geodata/master/data_tulungagung.json',
         {
           cache: 'no-store'
         }
@@ -36,19 +41,35 @@ const store = new Vuex.Store({
           return;
         }
         resp.json().then(data => {
-          const geo = data
-          commit('setData', geo)
+          commit('setDataTulungagung', data)
+          commit('setLoading')
+        })        
+      })      
+    },
+    loadDataTrenggalek({commit}){
+      commit('setLoading')
+      fetch(
+        'https://raw.githubusercontent.com/heru/geodata/master/data_trenggalek.json',
+        {
+          cache: 'no-store'
+        }
+      ).then(resp => {
+        if(resp.status != 200) {
+          return;
+        }
+        resp.json().then(data => {
+          commit('setDataTrenggalek', data)
           commit('setLoading')
         })        
       })      
     },
     loadMap({commit}){
       commit('setLoading')
-      fetch('https://raw.githubusercontent.com/heru/geodata/master/tulungagung.geojson').then(response => {
+      fetch('https://raw.githubusercontent.com/heru/geodata/master/tatgk.geojson').then(response => {
         if(response.status != 200) {
           return;
         }
-        response.json().then(data => {
+        response.json().then(data => {          
           commit('setGeojson', data)
           commit('setLoading')
         })        
@@ -56,6 +77,7 @@ const store = new Vuex.Store({
     }
   }
 })
-store.dispatch('loadData')
+store.dispatch('loadDataTulungagung')
+store.dispatch('loadDataTrenggalek')
 store.dispatch('loadMap')
 export default store
