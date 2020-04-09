@@ -27,7 +27,7 @@
         <v-card-text>
           Source code aplikasi ini tersedia bebas untuk di copy, modifikasi dan digunakan asalkan dicantumkan sumber aplikasinya.
           Jika anda tertarik untuk sumbang ide/saran ataupun bergabung dengan pengembangan sistem ini silahkan kirim surel ke heru[dot]ekos[at]gmail[dot]com 
-          atau silahkan clone repository source code ini di github dan lalukan pull request hasil modifikasi anda.
+          atau silahkan clone repository source code ini di github, modifikasi dan silahkan buat pull request hasil modifikasi anda.
         </v-card-text>
         </v-card>      
       </v-col>
