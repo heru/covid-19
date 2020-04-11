@@ -46,7 +46,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-const InfoKabupaten = () => import('./InfoKabupaten')
+const InfoKabupaten = () => import(/* webpackPrefetch: true */ './InfoKabupaten')
 
 export default {
   name: 'Info',

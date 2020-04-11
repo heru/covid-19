@@ -4,7 +4,7 @@ import '@/registerServiceWorker'
 import router from '@/router'
 import store from '@/store'
 
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker, LLayerGroup, LControlScale, LControlLayers } from 'vue2-leaflet'
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import vuetify from './plugins/vuetify';
@@ -13,6 +13,9 @@ import './registerServiceWorker'
 Vue.component('l-map', LMap)
 Vue.component('l-tile-layer', LTileLayer)
 Vue.component('l-marker', LMarker)
+Vue.component('l-control-layers', LControlLayers)
+Vue.component('l-layer-group', LLayerGroup)
+Vue.component('l-control-scale', LControlScale)
 
 delete Icon.Default.prototype._getIconUrl
 

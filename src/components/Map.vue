@@ -15,15 +15,31 @@
           center
         ></v-progress-circular>     
         <l-map :zoom="zoom" :center="center" id="map" v-if="!loading" style="z-index: 0;">
-            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            <!-- <l-geo-json
-              v-if="show"
-              :geojson="ponorogo_geojson"
-              :options="options"
-              :options-style="styleFunction"
+          <l-control-scale 
+            position="bottomleft" 
+            :imperial="false" 
+            :metric="true"
+          >
+          </l-control-scale>
+          <l-control-layers></l-control-layers>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Peta Dasar"
+          >
+            <l-tile-layer 
+              :url="url" 
+              :attribution="attribution"
             >
-            </l-geo-json>
-            -->
+            </l-tile-layer>
+          </l-layer-group>
+          
+          
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Tulungagung"
+          >
             <l-geo-json
               v-if="show"
               :geojson="tulungagung_geojson"
@@ -31,6 +47,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Trenggalek"
+          >
             <l-geo-json
               v-if="show"
               :geojson="trenggalek_geojson"
@@ -38,6 +60,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Kediri"
+          >
             <l-geo-json
               v-if="show"
               :geojson="kediri_geojson"
@@ -45,6 +73,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Blitar"
+          >
             <l-geo-json
               v-if="show"
               :geojson="blitar_geojson"
@@ -52,6 +86,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Nganjuk"
+          >
             <l-geo-json
               v-if="show"
               :geojson="nganjuk_geojson"
@@ -59,6 +99,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kota Kediri"
+          >
             <l-geo-json
               v-if="show"
               :geojson="kotakediri_geojson"
@@ -66,6 +112,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kota Blitar"
+          >
             <l-geo-json
               v-if="show"
               :geojson="kotablitar_geojson"
@@ -73,6 +125,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Pacitan"
+          >
             <l-geo-json
               v-if="show"
               :geojson="pacitan_geojson"
@@ -80,6 +138,12 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kab. Madiun"
+          >
             <l-geo-json
               v-if="show"
               :geojson="madiun_geojson"
@@ -87,13 +151,20 @@
               :options-style="styleFunction"
             >
             </l-geo-json>
+          </l-layer-group>
+          <l-layer-group
+            :visible="show"
+            layerType="overlay"
+            name="Kota Madiun"
+          >
             <l-geo-json
               v-if="show"
               :geojson="kotamadiun_geojson"
               :options="options"
               :options-style="styleFunction"
             >
-            </l-geo-json> -->
+            </l-geo-json>
+          </l-layer-group>
         </l-map>
       </v-card-text>
       <v-card-text>
@@ -120,7 +191,14 @@
 }
 </style>
 <script>
-import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet"
+import { 
+  LMap, 
+  LTileLayer, 
+  LGeoJson, 
+  LControlLayers,
+  LControlScale,
+  LLayerGroup 
+} from "vue2-leaflet"
 import { mapGetters } from 'vuex'
 import { data, geojson } from '@/store'
 
@@ -129,12 +207,16 @@ export default {
     LMap,
     LTileLayer,
     LGeoJson,
-    // LMarker
+    LControlLayers,
+    LLayerGroup,
+    LControlScale
   },
   data () {
     return {
-        url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        url:'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        landScapeUrl: 'http://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
+        landAttribution: '&copy <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors <a href="http://thunderforest.com/">Thunderforest</a>',
         zoom: 9,
         center: [-8.00013,111.700103],
         bounds: null,

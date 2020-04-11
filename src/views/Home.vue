@@ -15,8 +15,8 @@
 
 <script>
 // @ is an alias to /src
-const Map = () => import('@/components/Map')
-const Info = () => import('@/components/Info')
+const Map = () => import(/* webpackPrefetch: true */ '@/components/Map')
+const Info = () => import(/* webpackPrefetch: true */ '@/components/Info')
 
 export default {
   name: 'Home',
