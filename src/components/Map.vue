@@ -97,9 +97,13 @@
         </l-map>
       </v-card-text>
       <v-card-text>
-        <p>Sumber data :<br/>
+        <p>Sumber data (berubah sewaktu-waktu sesuai pengumuman dari masing-masing kabupaten/kota):<br/>
         DINAS Kesehatan Kab. Tulungagung tanggal {{ tulungagung.tanggal }} <br/>
-        DINAS Kesehatan Kab. Trenggalek {{ trenggalek.tanggal }}</p>
+        DINAS Kesehatan Kab. Trenggalek {{ trenggalek.tanggal }} <br/>
+        DINAS Kesehatan Kab. Pacitan {{ pacitan.tanggal }}<br/>
+        DINAS Kesehatan Kab. Blitar {{ blitar.tanggal }} <br/>
+        DINAS Kesehatan Kab. Kediri {{ kediri.tanggal }}
+        </p>
       </v-card-text>
     </v-card>
 </template>
@@ -182,16 +186,26 @@ export default {
             data = this.ponorogo.data
             color = '#FFFFFF'
             break
-          case 'KEDIRI':
+          case 'PACITAN':
+            data = this.pacitan.data
+            color = '#00FF00'
+            break
           case 'BLITAR':
+            data = this.blitar.data
+            color = '#FFFF00'
+            break
+          case 'KEDIRI':  
+            data = this.kediri.data
+            color = '#FF00FF'
+            break        
           case 'KOTA KEDIRI':
           case 'KOTA BLITAR':
           case 'MADIUN':
-          case 'KOTA MADIUN':
-          case 'PACITAN':
+          case 'KOTA MADIUN':          
           case 'NGANJUK':
             data = null
             color = '#FFFFFF'
+
             break
           default:
             break

@@ -56,6 +56,24 @@ const store = new Vuex.Store({
     setLoading(state) {
       state.loading = !state.loading
     },
+    set_data_nganjuk(state, data) {
+      state.nganjuk = data
+    },
+    set_data_kotakediri(state, data) {
+      state.kotakediri = data
+    },
+    set_data_kediri(state, data) {
+      state.kediri = data
+    },
+    set_data_kotablitar(state, data) {
+      state.kotablitar = data
+    },
+    set_data_blitar(state, data) {
+      state.blitar = data
+    },
+    set_data_pacitan(state, data) {
+      state.pacitan = data
+    },
     set_data_tulungagung(state, data){
       state.tulungagung = data
     },
@@ -108,30 +126,36 @@ const store = new Vuex.Store({
           cache: 'no-store'
         }
       ).then(resp => {
-        if(resp.status != 200) {
+        if(resp.status != 200) {          
+          commit('setLoading')
           return;
         }
         resp.json().then(data => {
           commit(`set_data_${kabupaten}`, data)
           commit('setLoading')
         })        
+      }).catch(() => {
+        commit('setLoading')
       })      
     },
     async loadMap({commit}, kabupaten){
       commit('setLoading')
       await fetch(`https://raw.githubusercontent.com/heru/geodata/master/${kabupaten}.geojson`).then(response => {
         if(response.status != 200) {
+          commit('setLoading')
           return;
         }
         response.json().then(data => {          
           commit(`set_geojson_${kabupaten}`, data)
           commit('setLoading')
         })        
+      }).catch(() => {
+        commit('setLoading')
       })      
     }
   }
 })
-export const data = ['tulungagung', 'trenggalek']
+export const data = ['tulungagung', 'trenggalek', 'pacitan', 'blitar', 'kediri']
 export const geojson = [
   'tulungagung_geojson', 
   'trenggalek_geojson', 
@@ -144,8 +168,20 @@ export const geojson = [
   'kotamadiun_geojson',
   'pacitan_geojson'
 ]
-export const daerah = ['pacitan','tulungagung', 'ponorogo', 'trenggalek', 
-  'blitar', 'kediri', 'nganjuk', 'kotakediri', 'kotablitar', 'madiun', 'kotamadiun']
+
+export const daerah = [
+  'pacitan',
+  'tulungagung', 
+  'ponorogo', 
+  'trenggalek', 
+  'blitar', 
+  'kediri', 
+  'nganjuk', 
+  'kotakediri', 
+  'kotablitar', 
+  'madiun', 
+  'kotamadiun'
+]
 daerah.forEach((kab) => {
   store.dispatch('loadMap', kab)
 })
