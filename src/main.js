@@ -10,6 +10,7 @@ import 'leaflet/dist/leaflet.css'
 import vuetify from './plugins/vuetify';
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
+import './registerServiceWorker'
 
 Vue.component('l-map', LMap)
 Vue.component('l-tile-layer', LTileLayer)

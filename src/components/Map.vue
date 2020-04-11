@@ -16,13 +16,84 @@
         ></v-progress-circular>     
         <l-map :zoom="zoom" :center="center" id="map" v-if="!loading" style="z-index: 0;">
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            <l-geo-json
+            <!-- <l-geo-json
               v-if="show"
-              :geojson="geojson"
+              :geojson="ponorogo_geojson"
               :options="options"
               :options-style="styleFunction"
             >
             </l-geo-json>
+            -->
+            <l-geo-json
+              v-if="show"
+              :geojson="tulungagung_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="trenggalek_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="kediri_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="blitar_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="nganjuk_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="kotakediri_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="kotablitar_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="pacitan_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="madiun_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json>
+            <l-geo-json
+              v-if="show"
+              :geojson="kotamadiun_geojson"
+              :options="options"
+              :options-style="styleFunction"
+            >
+            </l-geo-json> -->
         </l-map>
       </v-card-text>
       <v-card-text>
@@ -46,6 +117,7 @@
 <script>
 import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet"
 import { mapGetters } from 'vuex'
+import { data, geojson } from '@/store'
 
 export default {
   components: {
@@ -58,20 +130,19 @@ export default {
     return {
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution:'© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        zoom: 10,
-        center: [-8.09913,111.700103],
+        zoom: 9,
+        center: [-8.00013,111.700103],
         bounds: null,
         enableTooltip: true,
         fillColor: '#e4ce7f',
         show: true,
-        trengalek: []
+        kabupaten_list: geojson
     }
   },
   computed: {
     ...mapGetters([
-      'geojson',
-      'tulungagung',
-      'trenggalek',
+      ...data,
+      ...geojson,
       'loading'
     ]),
     options() {
@@ -107,6 +178,21 @@ export default {
             data = this.trenggalek.data
             color = '#000000'
             break
+          case 'PONOROGO':
+            data = this.ponorogo.data
+            color = '#FFFFFF'
+            break
+          case 'KEDIRI':
+          case 'BLITAR':
+          case 'KOTA KEDIRI':
+          case 'KOTA BLITAR':
+          case 'MADIUN':
+          case 'KOTA MADIUN':
+          case 'PACITAN':
+          case 'NGANJUK':
+            data = null
+            color = '#FFFFFF'
+            break
           default:
             break
         }
@@ -128,8 +214,7 @@ export default {
                 // fillOpacity: 0.09,
               })
               layer.bindTooltip(
-                  `
-                  <div>Kabupaten : ${feature.properties.KABUPATEN} </div>
+                  `<div>Kabupaten : ${feature.properties.KABUPATEN} </div>
                   <div>Kecamatan : ${feature.properties.KECAMATAN} </div>
                   <div>PDP : ${pdp}</div>
                   <div>ODP : ${odp}</div>
@@ -146,7 +231,8 @@ export default {
             // fillOpacity: 0.09,
           })
           layer.bindTooltip(
-            `<div>Kecamatan : ${feature.properties.KECAMATAN} </div>
+            `<div>Kabupaten : ${feature.properties.KABUPATEN} </div>
+            <div>Kecamatan : ${feature.properties.KECAMATAN} </div>
             <div>LUAS : ${feature.properties.LUAS_KM2}</div>
             `,
             { permanent: false, sticky: true }
