@@ -50,15 +50,8 @@
 </template>
 
 <script>
-// import Map from './components/Map';
-// import Info from '@/components/Info'
-
 export default {
   name: 'App',
-  // components: {
-  //   Map,
-  //   Info
-  // },
   data () {
     return {
       items: [

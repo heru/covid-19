@@ -8,8 +8,6 @@ import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import vuetify from './plugins/vuetify';
-// import 'roboto-fontface/css/roboto/roboto-fontface.css'
-// import '@mdi/font/css/materialdesignicons.css'
 import './registerServiceWorker'
 
 Vue.component('l-map', LMap)

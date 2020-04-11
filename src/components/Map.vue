@@ -102,12 +102,13 @@
         DINAS Kesehatan Kab. Trenggalek {{ trenggalek.tanggal }} <br/>
         DINAS Kesehatan Kab. Pacitan {{ pacitan.tanggal }}<br/>
         DINAS Kesehatan Kab. Blitar {{ blitar.tanggal }} <br/>
+        DINAS Kesehatan Kota Blitar {{ kotablitar.tanggal }} <br/>
         DINAS Kesehatan Kab. Kediri {{ kediri.tanggal }}
         </p>
       </v-card-text>
     </v-card>
 </template>
-<style>
+<style scoped>
 #map{
   width: 100%;
   height: 100%;
@@ -180,34 +181,27 @@ export default {
             break
           case 'TRENGGALEK':
             data = this.trenggalek.data
-            color = '#000000'
             break
           case 'PONOROGO':
             data = this.ponorogo.data
-            color = '#FFFFFF'
             break
           case 'PACITAN':
             data = this.pacitan.data
-            color = '#00FF00'
             break
           case 'BLITAR':
             data = this.blitar.data
-            color = '#FFFF00'
             break
           case 'KEDIRI':  
             data = this.kediri.data
-            color = '#FF00FF'
             break    
           case 'KOTA BLITAR':    
             data = this.kotablitar.data
-            color = '#00FF00'
             break
           case 'KOTA KEDIRI':          
           case 'MADIUN':
           case 'KOTA MADIUN':          
           case 'NGANJUK':
             data = null
-            color = '#FFFFFF'
             break
           default:
             break
@@ -220,14 +214,20 @@ export default {
               const positif = el.positif
               const otg = el.otg
               let fillColor = '#e4ce7f'
+              let fillOpacity = 0.9
+
               if(positif > 0) {
                 fillColor = '#FF0000'
-              } 
+              } else if (pdp == 0) {
+                fillColor = '#32CD32'
+              } else if(pdp > 0) {
+                fillColor = '#FFE866'
+              }
 
               layer.setStyle({
                 color: color,
-                fillColor: fillColor
-                // fillOpacity: 0.09,
+                fillColor: fillColor,
+                fillOpacity: fillOpacity,
               })
               layer.bindTooltip(
                   `<div>Kabupaten : ${feature.properties.KABUPATEN} </div>
@@ -242,8 +242,8 @@ export default {
           })
         } else {
           layer.setStyle({
-            color: '#000000',
-            fillColor: '#ECEFF1',
+            color: '#FFFFFF',
+            fillColor: '#e4ce7f',
             // fillOpacity: 0.09,
           })
           layer.bindTooltip(

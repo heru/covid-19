@@ -15,8 +15,8 @@
 
 <script>
 // @ is an alias to /src
-import Map from '@/components/Map.vue'
-import Info from '@/components/Info.vue'
+const Map = () => import('@/components/Map')
+const Info = () => import('@/components/Info')
 
 export default {
   name: 'Home',
