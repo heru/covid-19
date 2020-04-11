@@ -197,15 +197,17 @@ export default {
           case 'KEDIRI':  
             data = this.kediri.data
             color = '#FF00FF'
-            break        
-          case 'KOTA KEDIRI':
-          case 'KOTA BLITAR':
+            break    
+          case 'KOTA BLITAR':    
+            data = this.kotablitar.data
+            color = '#00FF00'
+            break
+          case 'KOTA KEDIRI':          
           case 'MADIUN':
           case 'KOTA MADIUN':          
           case 'NGANJUK':
             data = null
             color = '#FFFFFF'
-
             break
           default:
             break
