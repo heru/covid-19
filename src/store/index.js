@@ -155,7 +155,7 @@ const store = new Vuex.Store({
     }
   }
 })
-export const data = ['tulungagung', 'trenggalek', 'pacitan', 'blitar', 'kediri']
+export const data = ['tulungagung', 'trenggalek', 'pacitan', 'blitar', 'kediri', 'kotablitar']
 export const geojson = [
   'tulungagung_geojson', 
   'trenggalek_geojson', 
