@@ -30,7 +30,7 @@
       dark
     >
       <v-app-bar-nav-icon @click="show"></v-app-bar-nav-icon>
-      <v-toolbar-title>COVID-19 Tulungagung - Trenggalek</v-toolbar-title>
+      <v-toolbar-title>Visualisasi Sebaran COVID-19</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
 
