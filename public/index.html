@@ -16,7 +16,30 @@
       gtag('config', 'UA-105986339-2');
     </script>
 
-    <title>Covid-19 Kabupaten Tulungagung</title>
+    <title>Covid-19</title>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAlnxJmdKoCzzvg2SDnPYRlSc1Nr3mAiXo",
+        authDomain: "covid-19-map-jatim.firebaseapp.com",
+        databaseURL: "https://covid-19-map-jatim.firebaseio.com",
+        projectId: "covid-19-map-jatim",
+        storageBucket: "covid-19-map-jatim.appspot.com",
+        messagingSenderId: "955997729522",
+        appId: "1:955997729522:web:97534dc6fa290c4d47166b",
+        measurementId: "G-TCH3RJDXG3"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
     <link rel="preload" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="preload" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
     <link rel="preload" rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">

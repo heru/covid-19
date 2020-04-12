@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Covid Map East Java</string>
+    <string name="title_activity_main">Covid Map East Java</string>
+    <string name="package_name">net.cubelabs.m.covid</string>
+    <string name="custom_url_scheme">net.cubelabs.m.covid</string>
+</resources>

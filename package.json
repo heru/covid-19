@@ -5,9 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "capacitor:build": "vue-cli-service capacitor:build",
+    "capacitor:serve": "vue-cli-service capacitor:serve"
   },
   "dependencies": {
+    "@capacitor/android": "^1.0.0",
+    "@capacitor/cli": "^1.0.0",
+    "@capacitor/core": "^1.0.0",
     "@mdi/font": "^5.0.45",
     "core-js": "^3.6.4",
     "leaflet": "^1.6.0",
@@ -20,6 +25,7 @@
     "vuex": "^3.1.2"
   },
   "devDependencies": {
+    "@nklayman/vue-cli-plugin-capacitor": "~0.1.1",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-plugin-pwa": "~4.3.0",
